@@ -83,7 +83,7 @@ const consultaCapitais = () => {
 
   obj.forEach(element => {
 
-    if(element.capital.trim() != ''){
+    if (element.capital.trim() != '') {
       conteudo += `
       <option value="${element.capital}">${element.capital}</option>`
     }
@@ -138,9 +138,10 @@ const consultaCodigos = () => {
 
   arrFinal.sort();
   arrFinal.forEach(element => {
-
-    conteudo += `
+    if (element.trim() != '') {
+      conteudo += `
     <option value="${element}">${element}</option>`
+    }
   });
 
   $(`#codigo`).html(conteudo);
