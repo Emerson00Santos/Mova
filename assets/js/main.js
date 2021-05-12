@@ -13,11 +13,6 @@ function consulta(url) {
   return Httpreq.responseText;
 }
 
-//remove as duplicatas do vetor
-function removeDuplicatas(data) {
-  return data.filter((value, index) => data.indexOf(value) === index);
-}
-
 //verifica qual form vamos usar de acordo com seleção do select
 const consultaForm = () => {
 
@@ -96,7 +91,7 @@ const consultaCapitais = () => {
 }
 
 
-//busca todas as capitais disponiveis
+//busca todas os paises disponiveis
 const consultaPaises = () => {
 
   let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/all`));
@@ -130,10 +125,16 @@ const consultaCodigos = () => {
     });
   });
 
-  //remove as duplicatas
-  arrCodigos = removeDuplicatas(arrCodigos);
+  //remove as duplicatas do vetor de objetos
+  const seen = new Set();
+  const arrFinal = arrCodigos.filter(el => {
+    const duplicate = seen.has(el);
+    seen.add(el);
+    return !duplicate;
+  });
 
-  arrCodigos.forEach(element => {
+  arrFinal.sort();
+  arrFinal.forEach(element => {
 
     conteudo += `
     <option value="${element}">${element}</option>`
@@ -160,10 +161,15 @@ const consultaLinguas = () => {
     });
   });
 
-  //remove as duplicatas
-  arrLinguas = removeDuplicatas(arrLinguas);
+  //remove as duplicatas do vetor de objetos
+  const seen = new Set();
+  const arrFinal = arrLinguas.filter(el => {
+    const duplicate = seen.has(el.cod);
+    seen.add(el.cod);
+    return !duplicate;
+  });
 
-  arrLinguas.forEach(element => {
+  arrFinal.forEach(element => {
 
     conteudo += `
     <option value="${element.cod}">${element.nome}</option>`
@@ -173,92 +179,24 @@ const consultaLinguas = () => {
 
 }
 
-//consulta filtrando por regiao
-const consultaApiRegiao = () => {
+//consulta na api baseado no filtro
+const consultaApi = (tipo) => {
 
-  let regiao = $(`#regiao`).val();
-  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/region/${regiao}`));
+  let valor;
 
-  let conteudo = '';
+  if (tipo == 'region')
+    valor = $(`#regiao`).val();
+  else if (tipo == 'capital')
+    valor = $(`#capital`).val();
+  else if (tipo == 'lang')
+    valor = $(`#lingua`).val();
+  else if (tipo == 'name')
+    valor = $(`#pais`).val();
+  else if (tipo == 'callingcode')
+    valor = $(`#codigo`).val();
 
-  obj.forEach(element => {
+  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/${tipo}/${valor}`));
 
-    conteudo += `
-    <div onclick="consultaDetalhes('${element.alpha3Code}')" class=" mt-4 col-xs-12 col-md-3 col-lg-3">
-      <img  width="100%" height="100%" src="${element.flag}">
-    </div>
-    `
-  });
-
-  $(`#paises`).html(conteudo);
-}
-
-// consulta friltrando por capital
-const consultaApiCapital = () => {
-
-  let capital = $(`#capital`).val();
-  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/capital/${capital}`));
-
-  let conteudo = '';
-
-  obj.forEach(element => {
-
-    conteudo += `
-    <div onclick="consultaDetalhes('${element.alpha3Code}')" class=" mt-4 col-xs-12 col-md-3 col-lg-3">
-      <img  width="100%" height="100%" src="${element.flag}">
-    </div>
-    `
-  });
-
-  $(`#paises`).html(conteudo);
-}
-
-// consulta friltrando por capital
-const consultaApiCodigo = () => {
-
-  let code = $(`#codigo`).val();
-  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/callingcode/${code}`));
-
-  let conteudo = '';
-
-  obj.forEach(element => {
-
-    conteudo += `
-    <div onclick="consultaDetalhes('${element.alpha3Code}')" class=" mt-4 col-xs-12 col-md-3 col-lg-3">
-      <img  width="100%" height="100%" src="${element.flag}">
-    </div>
-    `
-  });
-
-  $(`#paises`).html(conteudo);
-}
-
-// consulta friltrando por capital
-const consultaApiLingua = () => {
-
-  let lingua = $(`#lingua`).val();
-  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/lang/${lingua}`));
-
-  let conteudo = '';
-
-  obj.forEach(element => {
-
-    conteudo += `
-    <div onclick="consultaDetalhes('${element.alpha3Code}')" class=" mt-4 col-xs-12 col-md-3 col-lg-3">
-      <img  width="100%" height="100%" src="${element.flag}">
-    </div>
-    `
-  });
-
-  $(`#paises`).html(conteudo);
-}
-
-// consulta friltrando por capital
-const consultaApiPais = () => {
-
-  let pais = $(`#pais`).val();
-  let obj = JSON.parse(consulta(`https://restcountries.eu/rest/v2/name/${pais}`));
-  console.log(obj);
   let conteudo = '';
 
   obj.forEach(element => {
@@ -286,9 +224,13 @@ const consultaApiRegiaoParametro = (regiao) => {
   $(`#filtro`).val('1');
   $(`#regiao`).val(`${regiao.toLowerCase()}`);
 
-  console.log($(`#regiao`).val());
+  $("#form-regiao").toggleClass('d-none');
+  $("#form-capital").addClass('d-none');
+  $("#form-lingua").addClass('d-none');
+  $("#form-pais").addClass('d-none');
+  $("#form-codigo").addClass('d-none');
 
-  // $(`#paises`).html(conteudo);
+  $(`#paises`).html('');
 
 }
 

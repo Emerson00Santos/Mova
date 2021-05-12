@@ -54,7 +54,9 @@
           </div>
 
         </ul>
-        <i class="bi bi-arrow-90deg-left mobile-nav-toggle"></i>
+        <a href="index.html">
+          <i style="font-size: 2em;" class="bi bi-arrow-90deg-left mobile-nav-toggle"></i>
+        </a>
       </nav><!-- .navbar -->
     </div>
   </header>
@@ -75,43 +77,44 @@
             </select>
           </div>
 
-          <div id="form-regiao" class="col-xs-12 col-md-3 d-none">
+          <div id="form-regiao" class="col-xs-12 mt-xs-3 col-md-3 d-none">
             <b><label class="corTexto">Região</label></b>
-            <select onchange="consultaApiRegiao()" id="regiao" class="form-select ml-3"
+            <select onchange="consultaApi('region')" id="regiao" class="form-select ml-3"
               aria-label="Default select example">
               <option disabled selected>Escolha uma opção</option>
               <option value="europe">Europa</option>
               <option value="oceania">Oceania</option>
               <option value="asia">Asia</option>
               <option value="americas">Americas</option>
-              <option value="afica">Africa</option>
+              <option value="africa">Africa</option>
+              <option value="polar">Polar</option>
             </select>
           </div>
 
           <div id="form-capital" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Capital</label></b>
-            <select onchange="consultaApiCapital()" id="capital" class="form-select ml-3"
+            <select onchange="consultaApi('capital')" id="capital" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-lingua" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Língua</label></b>
-            <select onchange="consultaApiLingua()" id="lingua" class="form-select ml-3"
+            <select onchange="consultaApi('lang')" id="lingua" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-pais" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">País</label></b>
-            <select onchange="consultaApiPais()" id="pais" class="form-select ml-3"
+            <select onchange="consultaApi('name')" id="pais" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-codigo" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Código</label></b>
-            <select onchange="consultaApiCodigo()" id="codigo" class="form-select ml-3"
+            <select onchange="consultaApi('callingcode')" id="codigo" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
