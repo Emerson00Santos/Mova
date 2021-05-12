@@ -83,8 +83,11 @@ const consultaCapitais = () => {
 
   obj.forEach(element => {
 
-    conteudo += `
-    <option value="${element.capital}">${element.capital}</option>`
+    if(element.capital.trim() != ''){
+      conteudo += `
+      <option value="${element.capital}">${element.capital}</option>`
+    }
+
   });
 
   $(`#capital`).html(conteudo);
