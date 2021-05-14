@@ -119,10 +119,25 @@ h1, h2, h3, h4, h5, h6 {
   margin-left: 5px;
 }
 
+.center {
+  display: flex;
+  justify-content: center;
+}
+
+i {
+  margin-right: 20px;
+}
+
 .navbar a:hover, .navbar .active, .navbar li:hover > a {
   color: #270224;
 }
 
+.ativo{
+
+background-color: #610559;
+border-color: #610559;
+
+}
 .navbar .getstarted {
   border-color: #610559;
   background: #FFF;
@@ -131,6 +146,16 @@ h1, h2, h3, h4, h5, h6 {
   border-style: solid;
   border-radius: 4px;
   color: #610559;
+}
+
+.btnPesquisa {
+  border-color: #610559;
+  background-color: #610559;
+  padding: 8px 20px;
+  margin-left: 30px;
+  border-style: solid;
+  border-radius: 10px;
+  color: #fff;
 }
 
 @media (max-width: 1366px) {

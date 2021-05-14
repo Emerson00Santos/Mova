@@ -30,6 +30,11 @@
 
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
+  <link href="assets/css/jquery.paginate.css" rel="stylesheet">
+
+
+  <!-- Sweet Alert -->
+  <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 </head>
 
@@ -68,20 +73,20 @@
           <div class="col-xs-12 col-md-3">
             <b><label class="corTexto">Filtre por</label></b>
             <select onchange="consultaForm()" id="filtro" class="form-select ml-3" aria-label="Default select example">
-              <option disabled selected>Escolha uma opção</option>
-              <option value="1">Região</option>
-              <option value="2">Capital</option>
-              <option value="3">Língua</option>
-              <option value="4">Páis</option>
-              <option value="5">Código de ligação</option>
+              <option  value="#" disabled selected>Escolha uma opção</option>
+              <option value="region">Região</option>
+              <option value="capital">Capital</option>
+              <option value="lang">Língua</option>
+              <option value="name">Páis</option>
+              <option value="callingcode">Código de ligação</option>
             </select>
           </div>
 
           <div id="form-regiao" class="col-xs-12 mt-xs-3 col-md-3 d-none">
             <b><label class="corTexto">Região</label></b>
-            <select onchange="consultaApi('region')" id="regiao" class="form-select ml-3"
+            <select id="regiao" class="form-select ml-3"
               aria-label="Default select example">
-              <option disabled selected>Escolha uma opção</option>
+              <option value="#" disabled selected>Escolha uma opção</option>
               <option value="europe">Europa</option>
               <option value="oceania">Oceania</option>
               <option value="asia">Asia</option>
@@ -93,43 +98,49 @@
 
           <div id="form-capital" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Capital</label></b>
-            <select onchange="consultaApi('capital')" id="capital" class="form-select ml-3"
+            <select id="capital" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-lingua" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Língua</label></b>
-            <select onchange="consultaApi('lang')" id="lingua" class="form-select ml-3"
+            <select id="lingua" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-pais" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">País</label></b>
-            <select onchange="consultaApi('name')" id="pais" class="form-select ml-3"
+            <select id="pais" class="form-select ml-3"
               aria-label="Default select example">
             </select>
           </div>
 
           <div id="form-codigo" class="col-xs-12 col-md-3 d-none">
             <b><label class="corTexto">Código</label></b>
-            <select onchange="consultaApi('callingcode')" id="codigo" class="form-select ml-3"
+            <select id="codigo" class="form-select ml-3"
               aria-label="Default select example">
             </select>
+          </div>
+
+          
+          <div id="form-btn" class="col-xs-12 col-md-3 d-none">
+            <button type="button" onclick="consultaApi()" class="btnPesquisa mt-4">Pesquisar</button>
           </div>
 
         </div>
       </div>
 
-
       <div class="card-body">
-        <div class="row" id="paises"></div>
+        <ul class="row" id="paises"></ul>
       </div>
     </div>
 
-
     <div id="detalhes" class="d-none card-body row"></div>
+    <div class="card-body">
+      <ul class="row" id="paisesVizinhos"></ul>
+    </div>
 
   </section>
 
@@ -145,7 +156,12 @@
 
   <!-- Template Main JS File -->
   <script src="assets/js/main.js"></script>
+  <script src="assets/js/jquery.paginate.js"></script>
+
+	<style>
+		.paginate { padding: 0; margin: 0; }
+		.paginate > li { list-style: none; padding: 10px 20px; border: 1px solid #ddd; margin: 10px 0; }
+	</style>
 
 </body>
-
 </html>
