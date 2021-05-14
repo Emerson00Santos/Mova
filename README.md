@@ -29,7 +29,7 @@ O usuário poderá realizar a sua consulta baseado em alguns filtros:
 * Emerson dos Santos - emersonsantos.cep@gmail.com
 
 ## :computer: Tecnologias
-- [Jquery](https://https://angular.io)
+- [Jquery](https://jquery.com/download/)
 - [Bootstrap](https://getbootstrap.com/) 
 - [SweetAlert](https://sweetalert2.github.io/)
 - [RestCountries API](https://restcountries.eu/)
